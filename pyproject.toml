@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cfd-flying-wing"
+version = "0.1.0"
+description = "Automated OpenVSP/OpenFOAM optimization loop for a small RC flying wing."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "CFD Flying Wing" }]
+dependencies = []
+
+[project.optional-dependencies]
+optimize = [
+  "numpy>=1.26",
+  "scikit-optimize>=0.10",
+  "scipy>=1.11",
+]
+test = [
+  "pytest>=8",
+]
+
+[project.scripts]
+cfd-flying-wing = "cfd_flying_wing.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,61 @@
+[run]
+artifacts_root = "runs/artifacts"
+database_path = "runs/results.sqlite3"
+
+[flight]
+mass_kg = 0.2
+cruise_speed_mps = 10.0
+air_density_kg_m3 = 1.225
+gravity_mps2 = 9.80665
+
+[bounds.span_m]
+low = 0.24
+high = 0.40
+
+[bounds.wing_area_m2]
+low = 0.035
+high = 0.075
+
+[bounds.taper_ratio]
+low = 0.35
+high = 1.0
+
+[bounds.sweep_deg]
+low = 0.0
+high = 35.0
+
+[bounds.twist_deg]
+low = -8.0
+high = 3.0
+
+[bounds.cg_mac]
+low = 0.15
+high = 0.35
+
+[openvsp]
+openvsp_python = ""
+airfoil_path = "assets/airfoils/placeholder_reflex.dat"
+export_format = "stl"
+geometry_filename = "wing.stl"
+
+[openfoam]
+docker_image = ""
+case_template_dir = ""
+container_case_dir = "/case"
+mesh_commands = ["surfaceFeatureExtract", "blockMesh", "snappyHexMesh -overwrite"]
+solver_command = "simpleFoam"
+force_coefficients_file = "postProcessing/forceCoeffs/0/coefficient.dat"
+
+[cfd]
+aoa_min_deg = -2.0
+aoa_max_deg = 12.0
+max_root_find_cases = 5
+lift_tolerance_fraction = 0.02
+trim_moment_limit = 0.2
+unstable_cm_slope_penalty = 20.0
+trim_moment_penalty = 5.0
+
+[optimizer]
+initial_samples = 24
+random_seed = 42
+candidate_pool_size = 2048
